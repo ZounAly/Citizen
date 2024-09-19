@@ -15,12 +15,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Serve the 'uploads' folder statically
-app.use('/uploads', express.static(path.join(__dirname, '../../citizenHelperService/theirno/public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../../Citizen/theirno/public/uploads')));
 
 // Set up storage engine for Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../citizenHelperService/theirno/public/uploads'));
+    cb(null, path.join(__dirname, '../../Citizen/theirno/public/uploads'));
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`); // Rename file to avoid conflicts
