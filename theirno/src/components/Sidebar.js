@@ -5,6 +5,12 @@ import sidebarLogo from '../images/footer-logo.png';
 const Sidebar = () => {
     const location = useLocation(); // Get the current location
 
+    // Define handleLogout function
+    const handleLogout = () => {
+        localStorage.removeItem("userEmail");
+        window.location.href = '/login'; // Redirect to login page after logout
+    };
+
     return (
         <div className="sidebar col-md-3 bg-blk">
             <div className="s-header d-flex align-items-center">
@@ -33,7 +39,8 @@ const Sidebar = () => {
                         <a className="nav-link" href="/all-queries">Queries</a>
                     </li>
                 </ul>
-                <button className="collapse-button border-0 p-0" id="logout">
+                {/* Add onClick to trigger handleLogout */}
+                <button className="collapse-button border-0 p-0" id="logout" onClick={handleLogout}>
                     <i className="fa fa-sign-out"></i>
                     <span>Logout</span>
                 </button>

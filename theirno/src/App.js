@@ -16,6 +16,7 @@ import AllInvoices from './pages/portal/AllInvoices';
 import AllQueries from './pages/portal/AllQueries';
 import AddService from './pages/portal/AddService';
 import Dashboard from './pages/portal/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -29,12 +30,12 @@ function App() {
         <Route path='/calculator' element={<Calculator />} />
         <Route path='/login' element={<Login />} />
         <Route path='/services/:title' element={<ServiceDetail />} />
-        <Route path='/all-services' element={<AllServices />} />
-        <Route path='/all-leads' element={<AllLeads />} />
-        <Route path='/all-invoices' element={<AllInvoices />} />
-        <Route path='/all-queries' element={<AllQueries />} />
-        <Route path='/add-service' element={<AddService />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/all-services' element={<ProtectedRoute><AllServices /></ProtectedRoute>} />
+        <Route path='/all-leads' element={<ProtectedRoute><AllLeads /></ProtectedRoute>} />
+        <Route path='/all-invoices' element={<ProtectedRoute><AllInvoices /></ProtectedRoute>} />
+        <Route path='/all-queries' element={<ProtectedRoute><AllQueries /></ProtectedRoute>} />
+        <Route path='/add-service' element={<ProtectedRoute><AddService /></ProtectedRoute>} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

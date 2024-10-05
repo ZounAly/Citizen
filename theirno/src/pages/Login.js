@@ -11,7 +11,7 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
+    
         try {
             const response = await fetch("http://localhost:5000/api/services/login", {
                 method: "POST",
@@ -20,11 +20,15 @@ function Login() {
                 },
                 body: JSON.stringify({ email: email, password }),
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok && data.success) {
-                window.location.href = '/dashboard'; 
+                // Store email in localStorage for session management
+                localStorage.setItem("userEmail", email);
+    
+                // Redirect to the dashboard
+                window.location.href = '/dashboard';
             } else {
                 setError("Invalid email or password");
             }
@@ -32,6 +36,7 @@ function Login() {
             setError("An error occurred. Please try again.");
         }
     };
+    
 
     return (
         <>
@@ -69,7 +74,7 @@ function Login() {
                                             required
                                         />
                                     </div>
-                                    <p><a href="#">Forgot Password</a></p>
+                                    {/* <p><a href="#">Forgot Password</a></p> */}
                                     <button type="submit" className="btn btn-primary">Login</button>
                                 </form>
                             </div>
