@@ -21,7 +21,7 @@ const ServiceForm = () => {
     const FIXED_LOCATION = { lat: 37.7749, lng: -122.4194 }; // Replace with your fixed location (San Francisco)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/services/title/${title}`)
+        fetch(`http://api.sridigital.com/api/services/title/${title}`)
             .then((response) => response.json())
             .then((data) => {
                 setService(data);
@@ -132,7 +132,7 @@ const ServiceForm = () => {
             totalCharges: parseFloat(totalCharges),
           };
 
-        fetch("http://localhost:5000/api/orders", {
+        fetch("http://api.sridigital.com/api/orders", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

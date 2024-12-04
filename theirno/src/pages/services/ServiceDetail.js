@@ -13,7 +13,7 @@ const ServiceDetail = () => {
 
     useEffect(() => {
         // Fetch service by title using the correct API endpoint
-        fetch(`http://localhost:5000/api/services/title/${title}`)
+        fetch(`http://api.sridigital.com/api/services/title/${title}`)
             .then(response => response.json())
             .then(data => {
                 setService(data);

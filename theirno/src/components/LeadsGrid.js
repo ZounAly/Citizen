@@ -9,7 +9,7 @@ const LeadsGrid = ({ showTitle }) => {
 
     // Fetch orders data
     useEffect(() => {
-        fetch('http://localhost:5000/api/orders') // Update with your server URL
+        fetch('http://api.sridigital.com/api/orders') // Update with your server URL
             .then(response => response.json())
             .then(data => {
                 setOrders(data);
