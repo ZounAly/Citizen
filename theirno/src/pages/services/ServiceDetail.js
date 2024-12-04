@@ -4,6 +4,7 @@ import Header from '../../includes/header';
 import Footer from '../../includes/footer';
 import Innerbanner from '../../components/Innerbanner';
 import FaqsAccordion from '../../components/FuelFaqsAccordion';
+import ServiceForm from '../../components/ServiceForm';
 
 const ServiceDetail = () => {
     const { title } = useParams();
@@ -47,7 +48,8 @@ const ServiceDetail = () => {
                                         <img src={service.serviceImages[0].url} className="img-fluid" alt={service.title} />
                                     )}
                                 </div>
-                                <div className="col-md-6">
+                                <ServiceForm/>
+                                {/* <div className="col-md-6">
                                 <form>
                                         <input type="text" class="form-control" placeholder="Full Name"/>
                                         <input type="email" class="form-control" placeholder="Email Address"/>
@@ -61,7 +63,7 @@ const ServiceDetail = () => {
                                         <h4>Charges: $0.00</h4>
                                         <input type="submit" class="btn btn-primary" value="Book Now"/>
                                     </form>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="row inner-row sec2">
                                 <div className="col-md-12">
