@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
-const serviceRoutes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
+const orderRoutes = require('./routes/orderRoutes.js');
 const connectDB = require('./config/db.js');
 
 connectDB();
@@ -42,7 +43,9 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 });
 
 // Use service routes for other functionalities
-app.use('/api/services', serviceRoutes);
+app.use('/api/services', routes);
+
+app.use('/api/orders', orderRoutes);
 
 // Base route for testing
 app.get('/', (req, res) => {

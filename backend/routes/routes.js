@@ -17,6 +17,10 @@ const {
   loginUser
 } = require('../controllers/userController');
 
+const {
+  createOrder
+} = require('../controllers/orderController');
+
 const router = express.Router();
 
 // @route   POST /api/services
