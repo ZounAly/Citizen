@@ -13,7 +13,7 @@ function Login() {
         e.preventDefault();
     
         try {
-            const response = await fetch("https://api.sridigital.com/api/services/login", {
+            const response = await fetch("https://api.sirahdigital.com/api/services/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

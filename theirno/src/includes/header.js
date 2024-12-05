@@ -10,7 +10,7 @@ function Header() {
 
     // Fetch services when the component mounts
     useEffect(() => {
-        fetch('https://api.sridigital.com/api/services') // Update with your server URL
+        fetch('https://api.sirahdigital.com/api/services') // Update with your server URL
             .then(response => response.json())
             .then(data => {
                 setServices(data);
