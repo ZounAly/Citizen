@@ -13,7 +13,7 @@ function Login() {
         e.preventDefault();
     
         try {
-            const response = await fetch("http://api.sridigital.com/api/services/login", {
+            const response = await fetch("https://api.sridigital.com/api/services/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function Login() {
                 localStorage.setItem("userEmail", email);
     
                 // Redirect to the dashboard
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
             } else {
                 setError("Invalid email or password");
             }

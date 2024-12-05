@@ -18,7 +18,7 @@ function AddService() {
     
         if (id) {
             setIsEdit(true);
-            fetch(`http://api.sridigital.com/api/services/${id}`)
+            fetch(`https://api.sridigital.com/api/services/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("response data: ", data);
@@ -49,7 +49,7 @@ function AddService() {
         const formData = new FormData();
         formData.append('image', file);
 
-        fetch('http://api.sridigital.com/api/upload', {
+        fetch('https://api.sridigital.com/api/upload', {
             method: 'POST',
             body: formData,
         })
@@ -57,7 +57,7 @@ function AddService() {
         .then(data => {
             const imageUrl = data.imageUrl;
             setImageUrl(imageUrl);
-            setImage(`http://api.sridigital.com${imageUrl}`);
+            setImage(`https://api.sridigital.com${imageUrl}`);
         })
         .catch(error => console.error('Error uploading image:', error));
     };
@@ -93,7 +93,7 @@ function AddService() {
         };
         console.log("formData: ", formData);
 
-        const url = isEdit ? `http://api.sridigital.com/api/services/${service._id}` : 'http://api.sridigital.com/api/services';
+        const url = isEdit ? `https://api.sridigital.com/api/services/${service._id}` : 'https://api.sridigital.com/api/services';
         const method = isEdit ? 'PUT' : 'POST';
 
         fetch(url, {
