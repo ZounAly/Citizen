@@ -30,11 +30,11 @@ function AddService() {
                     setFaqs(data.faqs || []);
 
                     if (data.serviceImages && data.serviceImages.length > 0) {
-                        setServiceImage(data.serviceImages[0].url);
-                        setServiceImageUrl(data.serviceImages[0].url);  // Set the URL for service image
+                        setServiceImage("https://api.sirahdigital.com"+data.serviceImages[0].url);
+                        setServiceImageUrl("https://api.sirahdigital.com"+data.serviceImages[0].url);  // Set the URL for service image
                         if (data.serviceImages[1]) {
-                            setSecondaryImage(data.serviceImages[1].url);
-                            setSecondaryImageUrl(data.serviceImages[1].url);  // Set the URL for secondary image
+                            setSecondaryImage("https://api.sirahdigital.com"+data.serviceImages[1].url);
+                            setSecondaryImageUrl("https://api.sirahdigital.com"+data.serviceImages[1].url);  // Set the URL for secondary image
                         }
                     }
                 })

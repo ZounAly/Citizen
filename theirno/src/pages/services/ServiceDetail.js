@@ -45,7 +45,7 @@ const ServiceDetail = () => {
                             <div className="row inner-row align-items-center sec1">
                                 <div className="col-md-6">
                                     {service.serviceImages[0] && (
-                                        <img src={service.serviceImages[0].url} className="img-fluid" alt={service.title} />
+                                        <img src={"https://api.sirahdigital.com"+service.serviceImages[0].url} className="img-fluid" alt={service.title} />
                                     )}
                                 </div>
                                 <ServiceForm/>
@@ -82,7 +82,7 @@ const ServiceDetail = () => {
                                 </div>
                                 <div className="col-md-4">
                                     {service.serviceImages[1] && (
-                                        <img src={service.serviceImages[1].url} className="img-fluid" alt="Service" />
+                                        <img src={"https://api.sirahdigital.com"+service.serviceImages[1].url} className="img-fluid" alt="Service" />
                                     )}
                                 </div>
                                 <div className="col-md-4">
