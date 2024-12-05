@@ -155,11 +155,11 @@ function AddService() {
                                 <div className="col-md-9">
                                     <div className="form-group">
                                         <label htmlFor="serviceName">Service Name</label>
-                                        <input type="text" className="form-control" id="serviceName" name="title" placeholder="Service Name" defaultValue={service.title || ''} />
+                                        <input type="text" required className="form-control" id="serviceName" name="title" placeholder="Service Name" defaultValue={service.title || ''} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="serviceDesc">Service Description</label>
-                                        <textarea className="form-control" id="serviceDesc" name="description" placeholder="Service Description" defaultValue={service.description || ''}></textarea>
+                                        <textarea required className="form-control" id="serviceDesc" name="description" placeholder="Service Description" defaultValue={service.description || ''}></textarea>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="features">Features</label>
@@ -167,7 +167,7 @@ function AddService() {
                                             {features.map((feature, index) => (
                                                 <div className="repeater-item" key={index}>
                                                     <input
-                                                        type="text"
+                                                        type="text" required
                                                         name={`featureItem[${index}]`}
                                                         value={feature}
                                                         placeholder="Add a feature"
@@ -188,7 +188,7 @@ function AddService() {
                                             {faqs.map((faq, index) => (
                                                 <div className="repeater-item" key={index}>
                                                     <input
-                                                        type="text"
+                                                        type="text" required
                                                         name={`questionItem[${index}]`}
                                                         value={faq.question}
                                                         placeholder="Add a Question"
@@ -196,7 +196,7 @@ function AddService() {
                                                         onChange={(e) => handleFaqChange(index, 'question', e.target.value)}
                                                     />
                                                     <input
-                                                        type="text"
+                                                        type="text" required
                                                         name={`answerItem[${index}]`}
                                                         value={faq.answer}
                                                         placeholder="Answer here"
@@ -217,24 +217,24 @@ function AddService() {
                                     <div className="form-group">
                                         <label htmlFor="serviceImage" className="form-label">Service Image</label>
                                         <img src={serviceImage} className="img-fluid" alt="Service" />
-                                        <input className="form-control" type="file" id="serviceImage" name="serviceImage" accept="image/jpeg, image/png, image/gif" onChange={handleServiceImageChange} />
+                                        <input required className="form-control" type="file" id="serviceImage" name="serviceImage" accept="image/jpeg, image/png, image/gif" onChange={handleServiceImageChange} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="serviceCharges">Service Charges ($)</label>
-                                        <input type="number" className="form-control" id="serviceCharges" name="serviceCharges" placeholder="Service Charges" min="1" defaultValue={service.serviceCharges || ''} />
+                                        <input required type="number" className="form-control" id="serviceCharges" name="serviceCharges" placeholder="Service Charges" min="1" defaultValue={service.serviceCharges || ''} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="mileCharges">Charges per Mile ($)</label>
-                                        <input type="number" className="form-control" id="mileCharges" name="mileCharges" placeholder="Charges per Mile" min="0" defaultValue={service.mileCharges || ''} />
+                                        <input required type="number" className="form-control" id="mileCharges" name="mileCharges" placeholder="Charges per Mile" min="0" defaultValue={service.mileCharges || ''} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="misCharges">Miscellaneous Charges ($)</label>
-                                        <input type="number" className="form-control" id="misCharges" name="misCharges" placeholder="Miscellaneous Charges" min="0" defaultValue={service.misCharges || ''} />
+                                        <input required type="number" className="form-control" id="misCharges" name="misCharges" placeholder="Miscellaneous Charges" min="0" defaultValue={service.misCharges || ''} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="secondaryImage" className="form-label">Secondary Image</label>
                                         <img src={secondaryImage} className="img-fluid" alt="Secondary" />
-                                        <input className="form-control" type="file" id="secondaryImage" name="secondaryImage" accept="image/jpeg, image/png, image/gif" onChange={handleSecondaryImageChange} />
+                                        <input required className="form-control" type="file" id="secondaryImage" name="secondaryImage" accept="image/jpeg, image/png, image/gif" onChange={handleSecondaryImageChange} />
                                     </div>
                                 </div>
                             </div>
