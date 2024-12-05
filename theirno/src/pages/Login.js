@@ -28,7 +28,7 @@ function Login() {
                 localStorage.setItem("userEmail", email);
     
                 // Redirect to the dashboard
-                // window.location.href = '/dashboard';
+                window.location.href = '/dashboard';
             } else {
                 setError("Invalid email or password");
             }
