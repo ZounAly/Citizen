@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const routes = require('./routes/routes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
+const queryRoutes = require('./routes/queryRoutes.js');
 const connectDB = require('./config/db.js');
 
 connectDB();
@@ -46,6 +47,8 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
 app.use('/api/services', routes);
 
 app.use('/api/orders', orderRoutes);
+
+app.use('/api/queries', queryRoutes);
 
 // Base route for testing
 app.get('/', (req, res) => {

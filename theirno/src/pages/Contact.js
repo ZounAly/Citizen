@@ -2,6 +2,7 @@ import React from "react";
 import Header from '../includes/header'
 import Footer from '../includes/footer'
 import Innerbanner from '../components/Innerbanner'
+import ContactForm from '../components/ContactForm'
 
 function Contact(){
     return(
@@ -28,23 +29,7 @@ function Contact(){
                         </div>
                         
                         <div className="col-md-8">
-                            <form method="">
-                                <div className="form-group">
-                                    <input type="text" className="form-control" name="your-name" placeholder="John Doe (or is it?)"/>
-                                </div>
-                            <div className="form-row">
-                                <div className="form-group col-md-6">
-                                <input type="email" className="form-control" name="your-email" placeholder="Email Address"/>
-                                </div>
-                                <div className="form-group col-md-6">
-                                <input type="tel" className="form-control" name="your-phone" placeholder="Phone Number"/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                    <textarea type="text" className="form-control" name="your-message" placeholder="Write a message"></textarea>
-                                </div>
-                            <button type="submit" className="btn btn-primary" name="c_submit">Send Message</button>
-                                            </form>
+                        <ContactForm />
                         </div>
                     </div>
                 </div>
