@@ -1,36 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import $ from 'jquery'; // Import jQuery
-// import 'datatables.net-dt/css/jquery.dataTables.min.css'; // Import DataTables CSS
-import 'datatables.net'; // Import DataTables JS
+import $ from 'jquery';
+import 'datatables.net';
 import moment from 'moment';
+import QRCode from 'qrcode';
 
 const LeadsGrid = ({ showTitle }) => {
     const [orders, setOrders] = useState([]);
 
     // Fetch orders data
     useEffect(() => {
-        fetch('https://api.sirahdigital.com/api/orders') // Update with your server URL
+        fetch('http://api.carreportpro.com/api/orders') // Update with your server URL
             .then(response => response.json())
-            .then(data => {
-                setOrders(data);
-            })
+            .then(data => setOrders(data))
             .catch(error => console.error('Error fetching orders:', error));
     }, []);
 
     useEffect(() => {
-        // Initialize DataTables only if there are orders
         if (orders.length > 0) {
-            console.log("orders: ", orders);
             const table = $('#lead-table').DataTable({
-                destroy: true, // Destroy any existing DataTable before reinitializing
+                destroy: true,
                 data: orders.map((order, index) => [
-                    index + 1, // Incremental S.No
-                    order.serviceId.title, // Service Name
+                    index + 1,
+                    order.serviceId.title,
                     order.totalCharges || '$0',
-                    order.distance,
-                    order.orderStatus,
+                    order.distance || 'N/A',
+                    order.orderStatus || 'Pending',
                     moment(order.createdOn).format('DD MM YYYY'),
-                    order.completedOn == null ? null : moment(order.completedOn).format('DD MM YYYY')
+                    order.completedOn == null
+                        ? 'Not Completed'
+                        : moment(order.completedOn).format('DD MM YYYY'),
+                    `<button class="generate-qr-btn" data-id="${order._id}" data-charges="${order.totalCharges}">
+                        Generate QR Code
+                     </button>`,
                 ]),
                 columns: [
                     { title: 'S.No' },
@@ -39,25 +40,60 @@ const LeadsGrid = ({ showTitle }) => {
                     { title: 'Distance' },
                     { title: 'Status' },
                     { title: 'Created On' },
-                    { title: 'Completed On' }
-                ]
+                    { title: 'Completed On' },
+                    { title: 'Actions' },
+                ],
             });
 
-            // Cleanup function to destroy DataTables instance when the component unmounts
+            // Add click event for Generate QR Code button
+            $('#lead-table').on('click', '.generate-qr-btn', async function () {
+                const orderId = $(this).data('id');
+                const charges = $(this).data('charges') || 0;
+
+                try {
+                    // Generate QR Code
+                    const qrData = `https://www.paypal.com/qr?amount=${charges}`;
+                    const qrCode = await QRCode.toDataURL(qrData);
+
+                    // Send QR Code via Email
+                    const response = await fetch('http://localhost:5000/api/send-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: 'abc@gmail.com', 
+                            subject: 'Your Payment QR Code',
+                            message: `Please use the following QR Code for payment.`,
+                            qrCodeContent: qrData,
+                        }),
+                    });
+
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('QR Code sent successfully!');
+                    } else {
+                        console.error('Error sending email:', result.error);
+                        alert('Failed to send QR Code. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error generating or sending QR Code:', error);
+                    alert('An error occurred while generating or sending the QR Code.');
+                }
+            });
+
             return () => {
                 table.destroy();
             };
         }
     }, [orders]);
-    
+
     return (
         <div className="d-leads table-div">
             <div className="new-leads">
-            {showTitle && <h3 className="text-center titles">Leads</h3>}
+                {showTitle && <h3 className="text-center titles">Leads</h3>}
                 {orders.length > 0 ? (
-                    <table id="lead-table" className="table display"></table> 
+                    <table id="lead-table" className="table display"></table>
                 ) : (
-                    <h4>No Leads Found</h4> 
+                    <h4>No Leads Found</h4>
                 )}
             </div>
         </div>

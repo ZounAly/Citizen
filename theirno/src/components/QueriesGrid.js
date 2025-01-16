@@ -9,7 +9,7 @@ const QueriesGrid = () => {
 
     // Fetch queries data
     useEffect(() => {
-        fetch('https://api.sirahdigital.com/api/queries') // Update with your server URL
+        fetch('http://api.carreportpro.com/api/queries') // Update with your server URL
             .then(response => response.json())
             .then(data => {
                 setQueries(data.queries);

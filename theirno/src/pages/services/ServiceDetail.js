@@ -13,7 +13,7 @@ const ServiceDetail = () => {
 
     useEffect(() => {
         // Fetch service by title using the correct API endpoint
-        fetch(`https://api.sirahdigital.com/api/services/title/${title}`)
+        fetch(`http://api.carreportpro.com/api/services/title/${title}`)
             .then(response => response.json())
             .then(data => {
                 setService(data);
@@ -45,7 +45,7 @@ const ServiceDetail = () => {
                             <div className="row inner-row align-items-center sec1">
                                 <div className="col-md-6">
                                     {service.serviceImages[0] && (
-                                        <img src={"https://api.sirahdigital.com"+service.serviceImages[0].url} className="img-fluid" alt={service.title} />
+                                        <img src={"http://api.carreportpro.com"+service.serviceImages[0].url} className="img-fluid" alt={service.title} />
                                     )}
                                 </div>
                                 <ServiceForm/>
@@ -82,7 +82,7 @@ const ServiceDetail = () => {
                                 </div>
                                 <div className="col-md-4">
                                     {service.serviceImages[1] && (
-                                        <img src={"https://api.sirahdigital.com"+service.serviceImages[1].url} className="img-fluid" alt="Service" />
+                                        <img src={"http://api.carreportpro.com"+service.serviceImages[1].url} className="img-fluid" alt="Service" />
                                     )}
                                 </div>
                                 <div className="col-md-4">

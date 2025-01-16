@@ -20,7 +20,7 @@ const ContactForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://api.sirahdigital.com/api/queries", {
+      const response = await fetch("http://api.carreportpro.com/api/queries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

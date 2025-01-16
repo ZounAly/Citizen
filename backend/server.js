@@ -6,6 +6,7 @@ const path = require('path');
 const routes = require('./routes/routes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
 const queryRoutes = require('./routes/queryRoutes.js');
+const emailRoutes = require('./routes/emailRoutes.js');
 const connectDB = require('./config/db.js');
 
 connectDB();
@@ -49,6 +50,8 @@ app.use('/api/services', routes);
 app.use('/api/orders', orderRoutes);
 
 app.use('/api/queries', queryRoutes);
+
+app.use('/api', emailRoutes);
 
 // Base route for testing
 app.get('/', (req, res) => {

@@ -7,7 +7,7 @@ const ServiceGrid = () => {
 
     // Fetch services data
     useEffect(() => {
-        fetch('https://api.sirahdigital.com/api/services') // Update with your server URL
+        fetch('http://api.carreportpro.com/api/services') // Update with your server URL
             .then(response => response.json())
             .then(data => {
                 setServices(data);
@@ -17,7 +17,7 @@ const ServiceGrid = () => {
 
     // Delete service by ID
     const deleteService = (id) => {
-        fetch(`https://api.sirahdigital.com/api/services/${id}`, {
+        fetch(`http://api.carreportpro.com/api/services/${id}`, {
             method: 'DELETE'
         })
         .then(response => {

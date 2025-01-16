@@ -21,7 +21,7 @@ const ServiceForm = () => {
     const FIXED_LOCATION = { lat: 37.7749, lng: -122.4194 }; // Replace with your fixed location (San Francisco)
 
     useEffect(() => {
-        fetch(`https://api.sirahdigital.com/api/services/title/${title}`)
+        fetch(`http://api.carreportpro.com/api/services/title/${title}`)
             .then((response) => response.json())
             .then((data) => {
                 setService(data);
@@ -132,7 +132,7 @@ const ServiceForm = () => {
             totalCharges: parseFloat(totalCharges),
           };
 
-        fetch("https://api.sirahdigital.com/api/orders", {
+        fetch("http://api.carreportpro.com/api/orders", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

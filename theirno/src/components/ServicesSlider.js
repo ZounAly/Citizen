@@ -20,7 +20,7 @@ const ServicesSlider = () => {
         requestAnimationFrame(raf);
 
         // Fetch dynamic services from API
-        fetch('https://api.sirahdigital.com/api/services')
+        fetch('http://api.carreportpro.com/api/services')
             .then(response => response.json())
             .then(data => {
                 setServices(data);
