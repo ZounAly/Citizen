@@ -15,18 +15,17 @@ router.post('/send-email', async (req, res) => {
             service: 'gmail',
             auth: {
                 user: 'emailshaheryar@gmail.com',
-                pass: '', // Use environment variables for better security
+                pass: '',
             },
         });
 
         // Email Content
         const mailOptions = {
-            from: 'emailshaheryar@gmail.com',
+            from: email,
             to: 'emailshaheryar@gmail.com', // Use the provided recipient email
             subject,
             html: `
                 <p>${message}</p>
-                <p>Please find the QR Code attached for payment.</p>
             `,
             attachments: [
                 {

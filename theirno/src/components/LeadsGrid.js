@@ -29,7 +29,7 @@ const LeadsGrid = ({ showTitle }) => {
                     order.completedOn == null
                         ? 'Not Completed'
                         : moment(order.completedOn).format('DD MM YYYY'),
-                    `<button class="generate-qr-btn" data-id="${order._id}" data-charges="${order.totalCharges}">
+                    `<button class="generate-qr-btn" data-id="${order._id}" data-charges="${order.totalCharges}" data-email="${order.email || ''}">
                         Generate QR Code
                      </button>`,
                 ]),
@@ -49,36 +49,41 @@ const LeadsGrid = ({ showTitle }) => {
             $('#lead-table').on('click', '.generate-qr-btn', async function () {
                 const orderId = $(this).data('id');
                 const charges = $(this).data('charges') || 0;
-
+                const email = $(this).data('email') || "";
+            
                 try {
+                    // Generate PayPal Payment Link
+                    const paymentUrl = `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&business=sb-dpilm517625@business.example.com&amount=${charges}&currency_code=USD&item_name=Service Payment`;
+            
                     // Generate QR Code
-                    const qrData = `https://www.paypal.com/qr?amount=${charges}`;
+                    const qrData = paymentUrl;
                     const qrCode = await QRCode.toDataURL(qrData);
-
-                    // Send QR Code via Email
-                    const response = await fetch('http://localhost:5000/api/send-email', {
+            
+                    // Send Email with QR Code and Payment Link
+                    const response = await fetch('http://api.carreportpro.com/api/send-email', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            email: 'abc@gmail.com', 
-                            subject: 'Your Payment QR Code',
-                            message: `Please use the following QR Code for payment.`,
+                            email: email, 
+                            subject: 'Your Payment QR Code and Link',
+                            message: `Please use the following link to make the payment: ${paymentUrl}. Alternatively, you can use the QR Code.`,
                             qrCodeContent: qrData,
+                            paymentUrl, // Add the payment link to the payload
                         }),
                     });
-
+            
                     const result = await response.json();
                     if (response.ok) {
-                        alert('QR Code sent successfully!');
+                        alert('Payment link and QR Code sent successfully!');
                     } else {
                         console.error('Error sending email:', result.error);
-                        alert('Failed to send QR Code. Please try again.');
+                        alert('Failed to send payment link and QR Code. Please try again.');
                     }
                 } catch (error) {
-                    console.error('Error generating or sending QR Code:', error);
-                    alert('An error occurred while generating or sending the QR Code.');
+                    console.error('Error generating or sending payment link/QR Code:', error);
+                    alert('An error occurred while generating or sending the payment link/QR Code.');
                 }
-            });
+            });            
 
             return () => {
                 table.destroy();
