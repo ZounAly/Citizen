@@ -34,54 +34,57 @@ const ServiceForm = () => {
     }, [title]);
 
     useEffect(() => {
-        console.log("here");
         console.log("window.google: ", window.google);
         console.log("mapRef.current", mapRef.current);
-        if (!window.google) {
-            console.warn("Google Maps API not loaded yet");
-            return; 
-        }
-
-        if (mapRef.current) {
-            const map = new window.google.maps.Map(mapRef.current, {
-                center: FIXED_LOCATION,
-                zoom: 8,
-            });
-
-            const marker = new window.google.maps.Marker({
-                position: FIXED_LOCATION,
-                map,
-                draggable: true,
-            });
-
-            const autocompleteInput = document.getElementById("autocomplete");
-            const autocomplete = new window.google.maps.places.Autocomplete(autocompleteInput);
-
-            autocomplete.bindTo("bounds", map);
-            map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(autocompleteInput);
-
-            autocomplete.addListener("place_changed", () => {
-                const place = autocomplete.getPlace();
-                if (place.geometry) {
-                    map.setCenter(place.geometry.location);
-                    marker.setPosition(place.geometry.location);
-                    setSelectedLocation({
-                        lat: place.geometry.location.lat(),
-                        lng: place.geometry.location.lng(),
-                    });
-                    calculateDistance(place.geometry.location);
-                }
-            });
-
-            marker.addListener("dragend", () => {
-                const position = marker.getPosition();
-                setSelectedLocation({ lat: position.lat(), lng: position.lng() });
-                calculateDistance(position);
-            });
-
-            markerRef.current = marker;
-        }
-    }, [mapRef.current]);
+        const initializeMap = () => {
+            if (window.google && mapRef.current) {
+                console.log("inside window.google: ", window.google);
+                console.log("inside mapRef.current", mapRef.current);
+                const map = new window.google.maps.Map(mapRef.current, {
+                    center: FIXED_LOCATION,
+                    zoom: 8,
+                });
+    
+                const marker = new window.google.maps.Marker({
+                    position: FIXED_LOCATION,
+                    map,
+                    draggable: true,
+                });
+    
+                const autocompleteInput = document.getElementById("autocomplete");
+                const autocomplete = new window.google.maps.places.Autocomplete(autocompleteInput);
+    
+                autocomplete.bindTo("bounds", map);
+                map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(autocompleteInput);
+    
+                autocomplete.addListener("place_changed", () => {
+                    const place = autocomplete.getPlace();
+                    if (place.geometry) {
+                        map.setCenter(place.geometry.location);
+                        marker.setPosition(place.geometry.location);
+                        setSelectedLocation({
+                            lat: place.geometry.location.lat(),
+                            lng: place.geometry.location.lng(),
+                        });
+                        calculateDistance(place.geometry.location);
+                    }
+                });
+    
+                marker.addListener("dragend", () => {
+                    const position = marker.getPosition();
+                    setSelectedLocation({ lat: position.lat(), lng: position.lng() });
+                    calculateDistance(position);
+                });
+    
+                markerRef.current = marker;
+            } else {
+                console.warn("Google Maps API not loaded yet. Retrying...");
+                setTimeout(initializeMap, 500); // Retry after 500ms
+            }
+        };
+    
+        initializeMap();
+    }, [mapRef.current]);    
 
     const calculateDistance = (destination) => {
         if (!destination) return;
