@@ -35,7 +35,7 @@ function Footer(){
                      <a href="/about">About us</a>
                      <a href="/services">Services</a>
                      <a href="/gallery">Gallery</a>
-                     <a href="/calculator">Calculator</a>
+                     {/* <a href="/calculator">Calculator</a> */}
                      <a href="/contact">Contact us</a>
                   </div>
                   <div className="col-md-3">

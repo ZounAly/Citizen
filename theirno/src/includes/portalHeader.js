@@ -76,7 +76,7 @@ function portalHeader(){
                                         <li className="nav-item"><a className="nav-link" href="/services/fuel-services">Fuel Services</a></li>
                                     </ul></li>
                                 <li className="nav-item"><a className="nav-link" href="/gallery">Gallery</a></li>
-                                <li className="nav-item"><a className="nav-link" href="/calculator">Calculator</a></li>
+                                {/* <li className="nav-item"><a className="nav-link" href="/calculator">Calculator</a></li> */}
                                 <li className="nav-item"><a className="nav-link" href="/contact">Contact Us</a></li>
                             </ul> 
                         </nav>
@@ -92,7 +92,7 @@ function portalHeader(){
                         <li className="nav-item"><a className="nav-link" href="/about">About Us</a></li>
                         <li className="nav-item"><a className="nav-link" href="#">Services</a></li>
                         <li className="nav-item"><a className="nav-link" href="/gallery">Gallery</a></li>
-                        <li className="nav-item"><a className="nav-link" href="#">Calculator</a></li>
+                        {/* <li className="nav-item"><a className="nav-link" href="#">Calculator</a></li> */}
                         <li className="nav-item"><a className="nav-link" href="/contact">Contact Us</a></li>
                         <li className="nav-item btn btn-outline-primary"><a className="nav-link" href="#"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
                     </ul> 

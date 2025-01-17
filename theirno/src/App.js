@@ -5,7 +5,7 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Index from './pages/Index';
 import Services from './pages/Services';
-import Calculator from './pages/Calculator';
+// import Calculator from './pages/Calculator';
 import Login from './pages/Login';
 import FuelServices from './pages/services/Fuel-services';
 import SnowRemover from './pages/services/Snow-remover';
@@ -27,7 +27,7 @@ function App() {
         <Route path='/gallery' element={<Gallery />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/services' element={<Services />} />
-        <Route path='/calculator' element={<Calculator />} />
+        {/* <Route path='/calculator' element={<Calculator />} /> */}
         <Route path='/login' element={<Login />} />
         <Route path='/services/:title' element={<ServiceDetail />} />
         <Route path='/all-services' element={<ProtectedRoute><AllServices /></ProtectedRoute>} />
