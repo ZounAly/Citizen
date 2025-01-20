@@ -9,7 +9,7 @@ const LeadsGrid = ({ showTitle }) => {
 
     // Fetch orders data
     useEffect(() => {
-        fetch('http://api.carreportpro.com/api/orders') // Update with your server URL
+        fetch('https://api.carreportpro.com/api/orders') // Update with your server URL
             .then(response => response.json())
             .then(data => setOrders(data))
             .catch(error => console.error('Error fetching orders:', error));
@@ -60,7 +60,7 @@ const LeadsGrid = ({ showTitle }) => {
                     const qrCode = await QRCode.toDataURL(qrData);
             
                     // Send Email with QR Code and Payment Link
-                    const response = await fetch('http://api.carreportpro.com/api/send-email', {
+                    const response = await fetch('https://api.carreportpro.com/api/send-email', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

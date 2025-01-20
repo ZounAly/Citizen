@@ -18,7 +18,7 @@ function AddService() {
     
         if (id) {
             setIsEdit(true);
-            fetch(`http://api.carreportpro.com/api/services/${id}`)
+            fetch(`https://api.carreportpro.com/api/services/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("response data: ", data);
@@ -30,11 +30,11 @@ function AddService() {
                     setFaqs(data.faqs || []);
 
                     if (data.serviceImages && data.serviceImages.length > 0) {
-                        setServiceImage("http://api.carreportpro.com"+data.serviceImages[0].url);
-                        setServiceImageUrl("http://api.carreportpro.com"+data.serviceImages[0].url);  // Set the URL for service image
+                        setServiceImage("https://api.carreportpro.com"+data.serviceImages[0].url);
+                        setServiceImageUrl("https://api.carreportpro.com"+data.serviceImages[0].url);  // Set the URL for service image
                         if (data.serviceImages[1]) {
-                            setSecondaryImage("http://api.carreportpro.com"+data.serviceImages[1].url);
-                            setSecondaryImageUrl("http://api.carreportpro.com"+data.serviceImages[1].url);  // Set the URL for secondary image
+                            setSecondaryImage("https://api.carreportpro.com"+data.serviceImages[1].url);
+                            setSecondaryImageUrl("https://api.carreportpro.com"+data.serviceImages[1].url);  // Set the URL for secondary image
                         }
                     }
                 })
@@ -49,7 +49,7 @@ function AddService() {
         const formData = new FormData();
         formData.append('image', file);
 
-        fetch('http://api.carreportpro.com/api/upload', {
+        fetch('https://api.carreportpro.com/api/upload', {
             method: 'POST',
             body: formData,
         })
@@ -57,7 +57,7 @@ function AddService() {
         .then(data => {
             const imageUrl = data.imageUrl;
             setImageUrl(imageUrl);
-            setImage(`http://api.carreportpro.com${imageUrl}`);
+            setImage(`https://api.carreportpro.com${imageUrl}`);
         })
         .catch(error => console.error('Error uploading image:', error));
     };
@@ -93,7 +93,7 @@ function AddService() {
         };
         console.log("formData: ", formData);
 
-        const url = isEdit ? `http://api.carreportpro.com/api/services/${service._id}` : 'http://api.carreportpro.com/api/services';
+        const url = isEdit ? `https://api.carreportpro.com/api/services/${service._id}` : 'https://api.carreportpro.com/api/services';
         const method = isEdit ? 'PUT' : 'POST';
 
         fetch(url, {
