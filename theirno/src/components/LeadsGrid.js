@@ -22,25 +22,25 @@ const LeadsGrid = ({ showTitle }) => {
                 data: orders.map((order, index) => [
                     index + 1,
                     order.serviceId.title,
+                    order.fullName,
+                    order.phone,
                     order.totalCharges || '$0',
-                    order.distance || 'N/A',
+                    order.distance ? parseFloat(order.distance).toFixed(2) : 'N/A',
                     order.orderStatus || 'Pending',
                     moment(order.createdOn).format('DD MM YYYY'),
-                    order.completedOn == null
-                        ? 'Not Completed'
-                        : moment(order.completedOn).format('DD MM YYYY'),
                     `<button class="generate-qr-btn" data-id="${order._id}" data-charges="${order.totalCharges}" data-email="${order.email || ''}">
-                        Generate QR Code
+                        Generate QR
                      </button>`,
                 ]),
                 columns: [
                     { title: 'S.No' },
-                    { title: 'Service Name' },
-                    { title: 'Total Charges' },
+                    { title: 'Service' },
+                    { title: 'Customer' },
+                    { title: 'Phone' },
+                    { title: 'Charges' },
                     { title: 'Distance' },
                     { title: 'Status' },
                     { title: 'Created On' },
-                    { title: 'Completed On' },
                     { title: 'Actions' },
                 ],
             });

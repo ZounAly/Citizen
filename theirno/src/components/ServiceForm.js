@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 const ServiceForm = () => {
     const { title } = useParams();
@@ -122,35 +123,85 @@ const ServiceForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const orderData = {
-            fullName: bookingData.fullName,
-            email: bookingData.email,
-            phone: bookingData.phone,
-            serviceId: service._id,
-            latitude: selectedLocation.lat,
-            longitude: selectedLocation.lng,
-            distance: distance,
-            totalCharges: parseFloat(totalCharges),
-          };
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const orderData = {
+    //         fullName: bookingData.fullName,
+    //         email: bookingData.email,
+    //         phone: bookingData.phone,
+    //         serviceId: service._id,
+    //         latitude: selectedLocation.lat,
+    //         longitude: selectedLocation.lng,
+    //         distance: distance,
+    //         totalCharges: parseFloat(totalCharges),
+    //       };
 
-        fetch("https://api.carreportpro.com/api/orders", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(orderData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                alert("Order booked successfully!");
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error("Error booking order:", error);
-            });
+    //     fetch("https://api.carreportpro.com/api/orders", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(orderData),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             alert("Order booked successfully!");
+    //             console.log(data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error booking order:", error);
+    //         });
+    // };
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    const orderData = {
+        fullName: bookingData.fullName,
+        email: bookingData.email,
+        phone: bookingData.phone,
+        serviceId: service._id,
+        latitude: selectedLocation.lat,
+        longitude: selectedLocation.lng,
+        distance: distance,
+        totalCharges: parseFloat(totalCharges),
     };
+
+    fetch("https://api.carreportpro.com/api/orders", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+    })
+        .then((response) => {
+            if (response.ok) {
+                swal({
+                    title: "Success!",
+                    text: "Your order has been successfully registered!",
+                    icon: "success",
+                }).then(() => {
+                    // Clear the form fields when the user clicks "OK"
+                    setBookingData({
+                        fullName: "",
+                        email: "",
+                        phone: "",
+                    });
+                    setSelectedLocation(null);
+                    setDistance(0);
+                    setTotalCharges(0);
+                });
+            } else {
+                swal("Error", "Failed to place the order. Please try again.", "error");
+            }
+            return response.json();
+        })
+        .then((data) => console.log(data))
+        .catch((error) => {
+            console.error("Error booking order:", error);
+            swal("Error", "An unexpected error occurred. Please try again.", "error");
+        });
+};
+ 
 
     if (loading) return <p>Loading...</p>;
 

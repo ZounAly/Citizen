@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import $ from 'jquery'; // Import jQuery
 import 'datatables.net'; // Import DataTables JS
+import swal from 'sweetalert'; // Import SweetAlert
 
 const ServiceGrid = () => {
     const [services, setServices] = useState([]);
@@ -24,9 +25,9 @@ const ServiceGrid = () => {
             if (response.ok) {
                 // Remove deleted service from the list
                 setServices(services.filter(service => service._id !== id));
-                alert('Service deleted successfully');
+                swal("Deleted!", "Service has been deleted successfully.", "success");
             } else {
-                alert('Failed to delete service');
+                swal("Error", "Failed to delete the service.", "error");
             }
         })
         .catch(error => console.error('Error deleting service:', error));
@@ -68,9 +69,19 @@ const ServiceGrid = () => {
             // Event listener for delete buttons
             $('#service-table').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');
-                if (window.confirm('Are you sure you want to delete this service?')) {
-                    deleteService(id);
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this service!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        deleteService(id);
+                    } else {
+                        // swal("Your service is safe!");
+                    }
+                });
             });
 
             // Cleanup function to destroy DataTables instance when the component unmounts
