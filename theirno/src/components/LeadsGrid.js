@@ -28,7 +28,7 @@ const LeadsGrid = ({ showTitle }) => {
                     order.distance ? parseFloat(order.distance).toFixed(2) : 'N/A',
                     order.orderStatus || 'Pending',
                     moment(order.createdOn).format('DD MM YYYY'),
-                    `<button class="generate-qr-btn" data-id="${order._id}" data-charges="${order.totalCharges}" data-email="${order.email || ''}">
+                    `<button class="generate-qr-btn styled-btn" data-id="${order._id}" data-charges="${order.totalCharges}" data-email="${order.email || ''}">
                         Generate QR
                      </button>`,
                 ]),
@@ -43,7 +43,12 @@ const LeadsGrid = ({ showTitle }) => {
                     { title: 'Created On' },
                     { title: 'Actions' },
                 ],
-            });
+                columnDefs: [
+                    { targets: 0, width: '5px' },
+                    { targets: 6, width: '5px' },
+                    { targets: 7, width: '100px' },
+                ],
+            });            
 
             // Add click event for Generate QR Code button
             $('#lead-table').on('click', '.generate-qr-btn', async function () {

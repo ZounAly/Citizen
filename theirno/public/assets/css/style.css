@@ -1791,3 +1791,15 @@ div#add-service button.btn.btn-primary {
     width: 100%;
     margin-bottom: 20px;
 }
+
+.styled-btn {
+    border-radius: 0 !important;
+    background: #000;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5px 8px;
+    border-color: transparent;
+    transition: all ease 0.5s;
+}
